@@ -1,110 +1,76 @@
-# 📸 Resize & Augmentasi Gambar Otomatis
+# 🖼️ Image Resize & Augmentation Script
 
-Proyek ini terdiri dari dua script Python yang masing-masing punya tugas:
-- `resize.py`: untuk mengubah ukuran (resize) gambar
-- `augmentasi.py`: untuk memperbanyak data gambar (augmentasi) dengan efek acak
+Proyek ini digunakan untuk melakukan **resize gambar ke 224x224** dan **augmentasi data gambar** menggunakan `albumentations` dan `opencv`. Cocok untuk persiapan dataset image classification atau object detection.
 
-Cocok buat kamu yang lagi bikin dataset AI atau Computer Vision. Ya, meskipun kamu nyebelin tapi kerjaanmu keren juga sih… dikit 😤
+## 📁 Struktur Folder
+
+```
+.
+├── dataset/                   # Folder gambar original (per kelas)
+│   ├── rumah-hakim/
+│   └── ...
+├── dataset_224x/             # Output gambar resize ke 224x224 (struktur tetap)
+├── dataset-aug/
+│   ├── rumah-hakim-aug/      # Output augmentasi gambar
+├── resize.py                 # Script resize
+├── augmentasi.py            # Script augmentasi
+├── rename_augmented.py      # Rename file hasil augmentasi
+└── requirements.txt         # Dependency Python
+```
+
+## 🧰 Fitur Script
+
+### ✅ Resize ke 224x224
+
+* Input: `dataset/`
+* Output: `dataset_224x/`
+* Semua gambar di-resize jadi 224x224 pixel.
+
+### ✅ Augmentasi Gambar
+
+* Augmentasi `HorizontalFlip`, `Rotate`, `Brightness/Contrast`, `ShiftScaleRotate`, dan `Blur`.
+* Menyimpan gambar original + N hasil augmentasi (default 7).
+
+### ✅ Rename Otomatis
+
+* Rename semua gambar augmentasi jadi format konsisten: `rumah-hakim_1.jpg`, `rumah-hakim_2.jpg`, dst.
+
+## 💻 Cara Jalankan
+
+1. **Clone repo atau siapkan folder project**
+2. Install dependency:
+
+   ```bash
+   pip install -r requirements.txt
+   ```
+3. Jalankan script:
+
+   * Resize:
+
+     ```bash
+     python resize.py
+     ```
+   * Augmentasi:
+
+     ```bash
+     python augmentasi.py
+     ```
+   * Rename:
+
+     ```bash
+     python rename_augmented.py
+     ```
+
+## 📆 Dependencies
+
+Lihat `requirements.txt` untuk daftar lengkap.
+
+## 😤 Catatan Penting
+
+* Gambar original **harus sudah rapi dan bersih** (hindari noise/background acak).
+* Semua hasil resize dan augmentasi otomatis jadi 224x224.
+* Jangan ubah nama folder atau struktur seenaknya, nanti error ya, *baka!*
 
 ---
 
-## 📂 Struktur Folder
-
-RESIZE-DAN-AUGMENTASI/
-├── resize.py # Script untuk resize gambar
-├── augmentasi.py # Script untuk augmentasi gambar
-├── requirements.txt # Daftar library yang dibutuhkan
-└── README.md # Penjelasan penggunaan project ini
-
-
-
----
-
-## ✅ Langkah-Langkah Penggunaan
-
-### 1. Install Python
-
-Pastikan kamu udah punya Python 3.7 ke atas.  
-Cek versi Python kamu dengan:
-
-
-python --version
-Kalau belum ada, install dari https://www.python.org/downloads/
-
-2. Install Library yang Dibutuhkan
-Buka terminal di folder project ini, lalu jalankan:
-
-
-
-pip install -r requirements.txt
-Kalau kamu pake virtual environment, aktifin dulu dong biar rapi.
-
-3. Menyiapkan Gambar
-Masukkan semua gambar kamu ke dalam folder.
-
-Nama folder bisa kamu sesuaikan di script resize.py dan augmentasi.py (lihat bagian input_folder).
-
-Gambar yang didukung: .jpg, .jpeg, .png.
-
-Contoh struktur:
-
-
-foto_asli/
-├── img1.jpg
-├── img2.png
-└── img3.jpeg
-4. Menggunakan resize.py
-📍 Fungsi: Mengubah ukuran semua gambar ke dimensi yang sama (default: 300x300)
-
-Cara pakai:
-Buka resize.py
-
-Ganti input_folder jadi nama folder gambar kamu
-
-(Opsional) Ganti ukuran di variabel size
-
-Jalankan script:
-
-
-python resize.py
-📦 Hasilnya akan muncul di folder foto_resize
-
-5. Menggunakan augmentasi.py
-📍 Fungsi: Menambah variasi gambar secara otomatis (augmentasi data)
-
-Cara pakai:
-Buka augmentasi.py
-
-Ganti input_folder sesuai nama folder gambar kamu
-
-(Opsional) Ubah jumlah augmentasi per gambar lewat augment_per_image
-
-Jalankan script:
-
-
-python augmentasi.py
-📦 Hasilnya akan muncul di folder foto_masjid_aug (atau sesuaikan di output_folder)
-
-📌 Catatan
-File resize.py menggunakan library Pillow
-
-File augmentasi.py menggunakan OpenCV dan Albumentations
-
-Ukuran akhir gambar hasil augmentasi akan tetap 300x300 (bisa diubah di bagian transform)
-
-💬 Output Console
-Setelah selesai di-resize ➜ akan muncul tulisan:
-Resize selesai, baka~
-
-Setelah selesai di-augmentasi ➜ akan muncul tulisan:
-Augmentasi selesai, puas kan?! 😤
-
-😡 Error?!
-Kalau muncul error:
-
-Pastikan folder input-nya bener dan ada isinya
-
-Cek apakah format gambar sesuai (.jpg, .jpeg, .png)
-
-Cek apakah semua dependency udah di-install
-
+**By:** Tim AI ✨
